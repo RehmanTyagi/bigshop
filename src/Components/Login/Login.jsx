@@ -16,14 +16,14 @@ const SignUp = () => {
                     <p>Welcome back! Please use your email or another service to sign in.</p>
                     <Input focus={true} type="email" placeholder="Email" />
                     <Input type="password" placeholder="Password" />
-                    <Button>Login</Button>
+                    <Button className="text-white">Login</Button>
                     <div className="flex gap-5 items-center">
                         <hr className="w-full border-gray-200 border-b-2" />
                         <p className="text-gray-300">or</p>
                         <hr className="w-full border-gray-200 border-b-2" />
                     </div>
-                    <Button className="grid grid-cols-[10px,1fr] items-center bg-white text-black border-2"><FcGoogle />Continue with Google</Button>
-                    <Button className="grid grid-cols-[10px,1fr] items-center bg-white text-black border-2"><IoPhonePortraitOutline />Continue with Phone</Button>
+                    <Button className="grid grid-cols-[10px,1fr] items-center bg-white border-2 "><FcGoogle />Continue with Google</Button>
+                    <Button className="grid grid-cols-[10px,1fr] items-center bg-white border-2"><IoPhonePortraitOutline />Continue with Phone</Button>
                     <div className="flex justify-between"><span className="flex items-center gap-2"><p className="max-sm:hidden">New to BigShop?</p><Link className="text-[color:var(--primaryColor)]" to="signup">Sign Up</Link></span><Link to="forgot" className="text-[color:var(--primaryColor)]">Forgot password?</Link></div>
                 </div>
             </div>
