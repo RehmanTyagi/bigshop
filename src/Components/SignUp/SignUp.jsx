@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const SignUp = () => {
     return (
-        <div className="h-dvh lg:grid lg:grid-cols-[auto,600px]">
+        <div className="text-sm h-dvh lg:grid lg:grid-cols-[auto,600px]">
             <div className="bg-gray-400 max-lg:hidden"><img className="h-full w-full" src="loginPage.jpeg" /></div>
             <div className="grid place-items-center h-full">
                 <div className="grid gap-3 px-20 py-5 max-sm:px-5 max-sm:gap-4">

@@ -10,6 +10,22 @@
     font-family: "Montserrat", sans-serif;
 }
 
+.react-tel-input .form-control {
+    @apply !w-full py-5 !text-base !border-[color:var(--primaryColor)];
+}
+
+.react-tel-input .flag-dropdown {
+    @apply !bg-[color:var(--primaryColor)];
+}
+
+.react-tel-input .flag-dropdown .arrow {
+    @apply !border-t-white;
+}
+
+.OTPContainer input {
+    @apply !bg-[color:var(--primaryColor)] !m-0 !rounded !text-white !font-semibold;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
