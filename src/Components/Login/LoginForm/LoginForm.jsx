@@ -3,14 +3,13 @@ import Button from "../../../UI/Button/Button"
 import Input from "../../../UI/Input/Input"
 import { Link } from "react-router-dom"
 import { BeatLoader } from "react-spinners"
-
 const LoginForm = () => {
     return (
         <div className="grid gap-3 max-sm:gap-4">
-            <img src="logo/logoColor.svg" className="h-20 size-40 max-sm:w-50 max-sm:h-auto max-sm:m-auto max-sm:mb-5 " />
-            <h1 className="text-3xl font-bold">Login to Access Orders</h1>
+            <img src="/logo/logoColor.svg" className="h-32 size-32 max-sm:w-50 max-sm:h-auto max-sm:m-auto max-sm:mb-5 " />
+            <h1 className="text-2xl font-bold">Login to Access Orders</h1>
             <p className="font-medium">Welcome back! Please use your email or another service to sign in.</p>
-            <Input focus={true} type="email" placeholder="Email" />
+            <Input type="email" placeholder="Email" />
             <Input type="password" placeholder="Password" />
             <Button className="flex bg-[color:var(--primaryColor)] justify-center items-center text-white"><BeatLoader color="white" size={15} /></Button>
             <p className="text-sm mb-2 font-medium">By continuing, you acknowledge that you have accepted the BigShop <Link className="underline text-sky-400 font-semibold">Conditions of Use</Link> and <Link className="underline text-sky-400 font-semibold">Privacy Notice</Link>.</p>

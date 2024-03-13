@@ -11,8 +11,8 @@ const SignUp = () => {
             <div className="bg-gray-400 max-lg:hidden"><img className="h-full w-full" src="loginPage.jpeg" /></div>
             <div className="grid place-items-center h-full">
                 <div className="grid gap-3 px-20 py-5 max-sm:px-5 max-sm:gap-4">
-                    <img src="logo/logoColor.svg" className="h-20 size-40 max-sm:w-50 max-sm:h-auto max-sm:m-auto max-sm:mb-5 " />
-                    <h1 className="text-3xl font-bold">Create an account in order to shop!</h1>
+                    <img src="logo/logoColor.svg" className="h-32 size-32 max-sm:w-50 max-sm:h-auto max-lg:m-auto max-sm:mb-5 " />
+                    <h1 className="text-2xl font-bold">Create an account in order to shop!</h1>
                     <p className="font-medium">setup your free account and shop on the 24-hour online platform. Enjoy using BigShop.</p>
                     <Input focus={true} type="text" placeholder="First and last Name" />
                     <Input type="email" placeholder="Email" />

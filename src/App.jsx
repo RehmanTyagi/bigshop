@@ -1,24 +1,33 @@
 // global css markup
 import './App.css'
 
+// react
+import { lazy, Suspense } from "react"
+
 // react router dom
 import { Route, Routes } from 'react-router-dom'
 
 // components
-import Login from "./Components/Login/Login"
-import SignUp from "./Components/SignUp/SignUp"
+const Login = lazy(() => import('./Components/Login/Login'))
+const PhoneLogin = lazy(() => import('./Components/Login/PhoneLogin/PhoneLogin'))
+const LoginForm = lazy(() => import('./Components/Login/LoginForm/LoginForm'))
+const SignUp = lazy(() => import('./Components/SignUp/SignUp'))
+const ForgetPassword = lazy(() => import('./Components/Login/ForgetPassword/ForgetPassword'))
+
+// Fallback Component
+import Spinner from './UI/BrandSpinner/BrandSpinner'
 import NotFound from "./Components/NotFound/NotFound"
-import PhoneLogin from "./Components/Login/PhoneLogin/PhoneLogin"
-import LoginForm from './Components/Login/LoginForm/LoginForm'
 function App() {
   return (
     <Routes>
       <Route path="/" element={<a href="login">Login page</a>} />
-      <Route path="login" element={<Login />}>
+      <Route path="test" element={<Spinner />} />
+      <Route path="login" element={<Suspense fallback={<Spinner />}><Login /></Suspense>}>
         <Route index element={<LoginForm />} />
-        <Route path="phonelogin" element={<PhoneLogin />} />
+        <Route path="phonelogin" element={<Suspense fallback={<Spinner />}><PhoneLogin /></Suspense>} />
+        <Route path="forgot" element={<Suspense fallback={<Spinner />}><ForgetPassword /></Suspense>} />
       </Route>
-      <Route path="signup" element={<SignUp />} />
+      <Route path="signup" element={<Suspense fallback={<Spinner />}><SignUp /></Suspense>} />
       <Route path="*" element={<NotFound errorCode={404} />} />
     </Routes>
 
