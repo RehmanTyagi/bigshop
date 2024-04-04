@@ -1,10 +1,15 @@
-const Input = ({ icon, type, placeholder, focus, className, onChange, maxLength, value, required, name, inputRegister }) => {
+
+const Input = ({ type, placeholder, focus, className, onChange, maxLength, value, name, inputRegister, label, errorMessage, labelClassName }) => {
     return (
-        <div className="flex items-center border-2 border-gray-200 rounded bg-gray-100 gap-1">
-            <span className="text-lg  px-2">{icon}</span>
-            <input {...inputRegister} value={value} name={name} maxLength={maxLength} onInput={onChange} type={type} required={required} autoFocus={focus} placeholder={placeholder}
-                className={`${"w-full outline-none p-2 placeholder:text-gray-400 font-semibold"} ${className}`} />
+        <div>
+            <label htmlFor={name} className={`text-xs font-bold line-clamp-3 ${labelClassName}`}>{label}</label>
+            <input {...inputRegister} value={value} name={name} maxLength={maxLength} onInput={onChange} type={type} autoFocus={focus} placeholder={placeholder}
+                className={`${"block w-full rounded border-0 p-1.5 text-sm font-semibold ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset"} ${className}`} />
+            {
+                errorMessage && <span className="text-xs text-red-500 font-semibold">{errorMessage}</span>
+            }
         </div>
     )
 }
-export default Input
+
+export default Input;

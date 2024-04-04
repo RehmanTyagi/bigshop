@@ -1,6 +1,6 @@
 const Button = ({ children, onClick, className, disabled, type }) => {
     return (
-        <button type={type} disabled={disabled} className={`${`p-2 ${disabled ? 'cursor-not-allowed' : ''} rounded-md font-semibold w-full`} ${className}`} onClick={onClick}>{children}</button>
+        <button type={type} disabled={disabled} className={`${`${disabled ? 'cursor-not-allowed' : ''} rounded font-medium p-2 bg-primaryColor text-white text-sm`} ${className}`} onClick={onClick}>{children}</button>
     )
 }
 

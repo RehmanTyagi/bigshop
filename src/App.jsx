@@ -7,31 +7,34 @@ import { lazy, Suspense } from "react"
 // react router dom
 import { Route, Routes } from 'react-router-dom'
 
-// components
+// components lazy loaded
 const AuthScreen = lazy(() => import('./Components/Auth/AuthScreen/AuthScreen'))
-const PhoneLogin = lazy(() => import('./Components/Auth/Login/PhoneLogin/PhoneLogin'))
-const LoginForm = lazy(() => import('./Components/Auth/Login/LoginForm/LoginForm'))
-const ForgetPassword = lazy(() => import('./Components/Auth/Login/ForgetPassword/ForgetPassword'))
-
-const SignUpScreen = lazy(() => import('./Components/Auth/SignUpScreen/SignUpScreen'))
+const Login = lazy(() => import('./Components/Auth/Login/Login'))
+// const SignUpForm = lazy(() => import('./Components/Auth/SignUpForm/SignUpForm'))
+// const ForgetPassword = lazy(() => import('./Components/Auth/Login/ForgetPassword/ForgetPassword'))
 
 // Fallback Component
 import Spinner from './/Components/Common/BrandSpinner/BrandSpinner'
 import NotFound from "./Components/NotFound/NotFound"
 
+// Components
+import Screen from './Components/Layout/Screen/Screen';
+import Header from './Components/Layout/Header/Header';
+import Footer from './Components/Layout/Footer/Footer';
+
+
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<a href="login">Login page</a>} />
-      <Route path="login" element={<Suspense fallback={<Spinner />}><AuthScreen /></Suspense>}>
-        <Route index element={<LoginForm />} />
-        <Route path="phonelogin" element={<Suspense fallback={<Spinner />}><PhoneLogin /></Suspense>} />
-        <Route path="forgot" element={<Suspense fallback={<Spinner />}><ForgetPassword /></Suspense>} />
+      <Route path="/" element={<Screen />}>
+        <Route index element={<Header />} />
+        <Route path="auth" element={<Suspense fallback={<Spinner />}><AuthScreen /></Suspense>}>
+          <Route index element={<Login />} />
+        </Route>
+        <Route element={<Footer />} />
       </Route>
-      <Route path="signup" element={<Suspense fallback={<Spinner />}><SignUpScreen /></Suspense>} />
       <Route path="*" element={<NotFound errorCode={404} />} />
     </Routes>
-
   )
 }
 
