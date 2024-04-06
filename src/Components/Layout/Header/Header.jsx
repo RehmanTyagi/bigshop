@@ -1,16 +1,22 @@
+// components
 import TopBar from "./TopBar/TopBar"
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-import { IoSearch } from "react-icons/io5";
-import { SlHeart, SlHandbag } from "react-icons/sl";
-import { CiMenuBurger } from 'react-icons/ci'
-import { TfiUser } from "react-icons/tfi";
-import { brandInfo } from '../../../brandInfo'
 import CategoryNavBtn from "../../Common/CategoryNavBtn/CategoryNavBtn";
 import Overlay from "../../Common/Overlay/Overlay";
+import Dropdown from "../../Common/DropDown/DropDown";
+
+// icons
+import { FaRegHeart } from "react-icons/fa6";
+import { LuShoppingBag } from "react-icons/lu";
+import { RiMenu2Fill } from 'react-icons/ri'
+import { FaRegUser } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+
+//others
+// import { brandInfo } from '../../../brandInfo'
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Dropdown from "../../Common/DropDown/DropDown";
 const Header = () => {
+    const iconSize = 23
     const [isOpen, setIsOpen] = useState(false)
 
     const handleHamburgerMenu = () => {
@@ -43,36 +49,40 @@ const Header = () => {
         <div>
             <TopBar />
             {/* Header */}
-            <div className="flex border-2 items-center justify-between max-lg:px-2 lg:px-10">
-                <CiMenuBurger onClick={handleHamburgerMenu} className="lg:hidden mr-10" size={22} />
-                <h1>{brandInfo.brandName}</h1>
+            <div className="flex border-2 relative items-center justify-between max-lg:shadow-customShadow max-lg:px-3 lg:px-10">
+                <RiMenu2Fill onClick={handleHamburgerMenu} className="lg:hidden mr-10" size={iconSize} />
+                <Link className="absolutes mix-blend-multiply">
+                    <img className="h-20" src="https://m.media-amazon.com/images/S/abs-image-upload-na/3/AmazonStores/A21TJRUUN4KGV/8b698934e838e577879675a48615bd14.w3334.h3334.jpg" />
+                </Link>
 
                 {/* overlay */}
                 <Overlay className="lg:hidden z-0" isOpen={isOpen} onClose={handleHamburgerMenu} />
 
                 <div className={`${isOpen && '!translate-x-0'} max-lg:-translate-x-full transition-all ease-in-out duration-300 max-lg:fixed max-lg:w-5/6 inset-0`}>
-                    <div className="flex relative inset-0 max-lg:flex-col max-lg:overflow-y-scroll max-lg:bg-gray-100 h-full">
+                    <div className="flex max-lg:gap-2 relative inset-0 max-lg:flex-col max-lg:overflow-y-scroll max-lg:bg-gray-100 h-full">
                         <div className="flex items-center p-5 lg:hidden">
-                            <h1>{brandInfo.brandName}</h1>
-                            <div className=" ml-5 p-0.5 px-3 rounded text-primaryColor border-2 border-primaryColor">Login/Register</div>
+                            <Link className="mix-blend-multiply">
+                                <img className="h-20" src="https://m.media-amazon.com/images/S/abs-image-upload-na/3/AmazonStores/A21TJRUUN4KGV/8b698934e838e577879675a48615bd14.w3334.h3334.jpg" />
+                            </Link>
+                            <div className=" ml-5 p-1 px-5 text-sm rounded text-primaryColor border-2 border-primaryColor">Login/Register</div>
                         </div>
 
-                        <div className="bg-white max-lg:overflow-y-scroll flex max-lg:flex-col">
+                        <div className="bg-white max-lg:border-2 flex max-lg:flex-col">
                             {/*mobile category navigation menu */}
                             <div className="flex items-center gap-5 p-5 lg:hidden">
-                                <CategoryNavBtn className="rounded-lg overflow-hidden" unit={[{ text: 'men', to: 'men' }, { text: 'women', to: 'women' }]} />
+                                <CategoryNavBtn className="rounded-lg overflow-hidden border-2" unit={[{ text: 'men' }, { text: 'women' }]} />
                             </div>
                             {
                                 /* navbar links */
                                 navbar.map((nav, index) => {
                                     return (
-                                        <div key={index} className="relative group max-md:text-sm hover:bg-gray-50">
-                                            <Dropdown titleClassName="py-5 px-3 text-sm" title={nav.title} isDropDownNew={nav.new}>
-                                                <div className="lg:absolute w-52 shadow max-lg:w-full">
+                                        <div key={index} className="relative group max-md:text-sm lg:hover:bg-gray-50">
+                                            <Dropdown title={nav.title} isDropDownNew={nav.new}>
+                                                <div className="lg:absolute bg-white w-52 shadow max-lg:w-full">
                                                     {
                                                         nav.categories.map((category, index) => {
                                                             return (
-                                                                <h3 className="p-2 font-medium max-lg:py-2 cursor-pointer pl-10 bg-white hover:bg-gray-100" key={index}>{category}</h3>
+                                                                <h3 className="p-2 max-lg:py-2 cursor-pointer pl-10 max-lg:text-xs hover:bg-gray-200" key={index}>{category}</h3>
                                                             )
                                                         })
                                                     }
@@ -85,11 +95,13 @@ const Header = () => {
                         </div>
 
                         {/* Our Mission*/}
-                        <Dropdown className="hidden">
-                            <p>1</p>
-                            <p>2</p>
-                            <p>3</p>
-                        </Dropdown>
+                        <div className="bg-white grid gap-2 p-3">
+                            <h2 className="font-bold uppercase">More Links</h2>
+                            <h3 className="text-sm font-semibold text-secondaryColor" >Join Program to Earn Points</h3>
+                            <h3 className="text-sm" >Contact Us</h3>
+                            <h3 className="text-sm" >FAQ</h3>
+                            <h3 className="text-sm" >Community initiatives</h3>
+                        </div>
                         {/* Other Links*/}
                         <Dropdown className="hidden">
                             <p>1</p>
@@ -101,14 +113,17 @@ const Header = () => {
 
                 {/* user actions */}
                 <div className="flex items-center">
-                    <Link className="p-5 hover:bg-gray-100 max-lg:hidden">
-                        <TfiUser className="cursor-pointer" size={25} />
+                    <Link className="p-5 px-3 hover:bg-gray-100 max-lg:hidden">
+                        <FaSearch className="cursor-pointer" size={iconSize} />
                     </Link>
-                    <Link className="p-5 max-lg:p-2 hover:bg-gray-100">
-                        <SlHeart className="cursor-pointer max-lg:h-7" size={25} />
+                    <Link className="p-5 px-3 hover:bg-gray-100 max-lg:hidden">
+                        <FaRegUser className="cursor-pointer" size={iconSize} />
                     </Link>
-                    <Link className="p-5 max-lg:p-2 hover:bg-gray-100">
-                        <SlHandbag className="cursor-pointer max-lg:h-7" size={25} />
+                    <Link className="p-5 px-3 max-lg:p-2 hover:bg-gray-100">
+                        <FaRegHeart className="cursor-pointer max-lg:h-7" size={iconSize} />
+                    </Link>
+                    <Link className="p-5 px-3 max-lg:p-2 hover:bg-gray-100">
+                        <LuShoppingBag className="cursor-pointer max-lg:h-7" size={iconSize} />
                     </Link>
                 </div>
             </div>

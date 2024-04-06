@@ -22,6 +22,9 @@ export default {
       backgroundImage: {
         'loginBG': 'url(../assets/images/backgroundImg.jpg)',
       },
+      boxShadow: {
+        'customShadow': '0 2px 10px rgba(0, 0, 0, 0.1)',
+      },
     },
   },
   plugins: [],

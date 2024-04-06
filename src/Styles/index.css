@@ -34,7 +34,8 @@
 
 /* variables */
 body {
-    --primaryColor: #495057;
+    --primaryColor: #0d1b2a;
+    --secondaryColor: #f44336;
 }
 
 @media (max-width: 768px) {
