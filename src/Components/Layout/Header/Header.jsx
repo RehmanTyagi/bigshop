@@ -82,7 +82,7 @@ const Header = () => {
                                                     {
                                                         nav.categories.map((category, index) => {
                                                             return (
-                                                                <h3 className="p-2 max-lg:py-2 cursor-pointer pl-10 max-lg:text-xs hover:bg-gray-200" key={index}>{category}</h3>
+                                                                <h3 className="p-2 px-5 max-lg:py-2 cursor-pointer hover:bg-gray-200" key={index}>{category}</h3>
                                                             )
                                                         })
                                                     }
@@ -94,19 +94,21 @@ const Header = () => {
                             }
                         </div>
 
-                        {/* Our Mission*/}
-                        <div className="bg-white grid gap-2 p-3">
-                            <h2 className="font-bold uppercase">More Links</h2>
+                        {/* Special Links*/}
+                        <div className="bg-white grid gap-2 p-3 lg:hidden">
+                            <h2 className="font-bold text-sm uppercase">Special Links</h2>
                             <h3 className="text-sm font-semibold text-secondaryColor" >Join Program to Earn Points</h3>
-                            <h3 className="text-sm" >Contact Us</h3>
                             <h3 className="text-sm" >FAQ</h3>
                             <h3 className="text-sm" >Community initiatives</h3>
                         </div>
                         {/* Other Links*/}
-                        <Dropdown className="hidden">
-                            <p>1</p>
-                            <p>2</p>
-                            <p>3</p>
+                        <Dropdown className="lg:hidden" title="More Links" titleParent="bg-white" titleClassName="!font-bold text-sm max-lg:!uppercase">
+                            <div className="bg-white border-2 grid gap-2 p-3">
+                                <h3 className="text-sm">Careers</h3>
+                                <h3 className="text-sm">About Us</h3>
+                                <h3 className="text-sm">Terms & Condition T&C</h3>
+                                <h3 className="text-sm" >Contact Us</h3>
+                            </div>
                         </Dropdown>
                     </div>
                 </div>
