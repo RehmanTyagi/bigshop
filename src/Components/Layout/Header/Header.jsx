@@ -3,7 +3,9 @@ import TopBar from "./TopBar/TopBar"
 import CategoryNavBtn from "../../Common/CategoryNavBtn/CategoryNavBtn";
 import Overlay from "../../Common/Overlay/Overlay";
 import Dropdown from "../../Common/DropDown/DropDown";
-
+import Skeleton from 'react-loading-skeleton'
+import Logo from '../../Common/Logo/Logo'
+import IconTitleButton from '../../Common/IconTitleButton/IconTitleButton'
 // icons
 import { FaRegHeart } from "react-icons/fa6";
 import { LuShoppingBag } from "react-icons/lu";
@@ -13,51 +15,44 @@ import { FaSearch } from "react-icons/fa";
 
 //others
 // import { brandInfo } from '../../../brandInfo'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
+//hooks
+import axios from 'axios'
+
 const Header = () => {
-    const iconSize = 23
     const [isOpen, setIsOpen] = useState(false)
+    const [navItems, setNavItems] = useState([])
 
     const handleHamburgerMenu = () => {
         setIsOpen(!isOpen)
     }
 
-    const navbar = [
-        {
-            new: true,
-            title: 'TopWear',
-            categories: ['Jogger Sweatpants', 'Parachute Joggers', 'Skinny Joggers', 'Fleece Joggers', 'Denim Joggers', 'Cargo Joggers', 'Chino Joggers'],
-        },
-        {
-            title: 'BottomWear',
-            categories: ['Sports Running', 'Boots', 'Sneakers', 'Oxfords', 'Derby Shoes', 'Loafers',],
-        },
-        {
-            new: true,
-            title: 'Sneakers & Shoes',
-            categories: ['Crew Neck', 'V-Neck', 'Henley', 'Polo Shirt', 'Oversized T-shirts', 'Oversized Long Sleeve', 'Graphic/Printed', 'Muscle Fit/Slim Fit'],
-        },
-        {
-
-            title: 'Accessories',
-            categories: ['GYM Bottles', 'Sunglasses', 'Mugs', 'Belts', 'Socks', 'Caps', 'bracelets', 'Bags'],
+    useEffect(function () {
+        const fetchNavItems = async () => {
+            try {
+                const { data } = await axios.get('http://localhost:5000/navItems')
+                console.log(data)
+                setNavItems(data)
+            } catch (error) {
+                console.log(error)
+            }
         }
-    ]
+        fetchNavItems()
+    }, [])
 
     return (
         <div>
             <TopBar />
             {/* Header */}
             <div className="flex border-2 relative items-center justify-between max-lg:shadow-customShadow max-lg:px-3 lg:px-10">
-                <RiMenu2Fill onClick={handleHamburgerMenu} className="lg:hidden mr-10" size={iconSize} />
-                <Link className="absolutes mix-blend-multiply">
-                    <img className="h-20" src="https://m.media-amazon.com/images/S/abs-image-upload-na/3/AmazonStores/A21TJRUUN4KGV/8b698934e838e577879675a48615bd14.w3334.h3334.jpg" />
-                </Link>
-
+                <IconTitleButton className="lg:hidden">
+                    <RiMenu2Fill onClick={handleHamburgerMenu} size={25} />
+                </IconTitleButton>
                 {/* overlay */}
                 <Overlay className="lg:hidden z-0" isOpen={isOpen} onClose={handleHamburgerMenu} />
-
+                <Logo />
                 <div className={`${isOpen && '!translate-x-0'} max-lg:-translate-x-full transition-all ease-in-out duration-300 max-lg:fixed max-lg:w-5/6 inset-0`}>
                     <div className="flex max-lg:gap-2 relative inset-0 max-lg:flex-col max-lg:overflow-y-scroll max-lg:bg-gray-100 h-full">
                         <div className="flex items-center p-5 lg:hidden">
@@ -73,24 +68,25 @@ const Header = () => {
                                 <CategoryNavBtn className="rounded-lg overflow-hidden border-2" unit={[{ text: 'men' }, { text: 'women' }]} />
                             </div>
                             {
-                                /* navbar links */
-                                navbar.map((nav, index) => {
-                                    return (
-                                        <div key={index} className="relative group max-md:text-sm lg:hover:bg-gray-50">
-                                            <Dropdown title={nav.title} isDropDownNew={nav.new}>
-                                                <div className="lg:absolute bg-white w-52 shadow max-lg:w-full">
-                                                    {
-                                                        nav.categories.map((category, index) => {
-                                                            return (
-                                                                <h3 className="p-2 px-5 max-lg:py-2 cursor-pointer hover:bg-gray-200" key={index}>{category}</h3>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                            </Dropdown>
-                                        </div>
-                                    )
-                                })
+                                navItems.length ?
+                                    /* navbar links */
+                                    navItems.map((nav, index) => {
+                                        return (
+                                            <div key={index} className="relative group max-md:text-sm lg:hover:bg-gray-50">
+                                                <Dropdown title={nav.title} isDropDownNew={nav.salesOn}>
+                                                    <div className="lg:fixed p-2 bg-white !left-0 shadow max-lg:w-full">
+                                                        {
+                                                            nav.categories.map((category, index) => {
+                                                                return (
+                                                                    <div key={index}><Link to={category.link} className="p-2 capitalize px-5 max-lg:py-2 flex items-center gap-1 cursor-pointer hover:bg-gray-50" key={index}>{category.type}<p className="text-[10px] font-bold text-secondaryColor">{category.activeOffer}</p></Link></div>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                </Dropdown>
+                                            </div>
+                                        )
+                                    }) : <div className="grid grid-cols-4 gap-2"><Skeleton count={1} height={30} width={100} /><Skeleton count={1} height={30} width={100} /><Skeleton count={1} height={30} width={100} /><Skeleton count={1} height={30} width={100} /></div>
                             }
                         </div>
 
@@ -114,19 +110,23 @@ const Header = () => {
                 </div>
 
                 {/* user actions */}
-                <div className="flex items-center">
-                    <Link className="p-5 px-3 hover:bg-gray-100 max-lg:hidden">
-                        <FaSearch className="cursor-pointer" size={iconSize} />
-                    </Link>
-                    <Link className="p-5 px-3 hover:bg-gray-100 max-lg:hidden">
-                        <FaRegUser className="cursor-pointer" size={iconSize} />
-                    </Link>
-                    <Link className="p-5 px-3 max-lg:p-2 hover:bg-gray-100">
-                        <FaRegHeart className="cursor-pointer max-lg:h-7" size={iconSize} />
-                    </Link>
-                    <Link className="p-5 px-3 max-lg:p-2 hover:bg-gray-100">
-                        <LuShoppingBag className="cursor-pointer max-lg:h-7" size={iconSize} />
-                    </Link>
+                <div className="flex">
+                    <IconTitleButton className="max-lg:hidden">
+                        <FaSearch />
+                        <p className="text-xs font-bold">Search</p>
+                    </IconTitleButton>
+                    <IconTitleButton className="max-lg:hidden">
+                        <FaRegUser className="cursor-pointer" />
+                        <p className="text-xs font-bold">Profile</p>
+                    </IconTitleButton>
+                    <IconTitleButton>
+                        <FaRegHeart className="cursor-pointer" />
+                        <p className="text-xs font-bold">Wishlist</p>
+                    </IconTitleButton>
+                    <IconTitleButton>
+                        <LuShoppingBag className="cursor-pointer" />
+                        <p className="text-xs font-bold">Bags</p>
+                    </IconTitleButton>
                 </div>
             </div>
         </div>

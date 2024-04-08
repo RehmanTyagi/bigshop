@@ -1,5 +1,6 @@
 // global css markup
 import './Styles/App.css'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 // react
 import { lazy, Suspense } from "react"

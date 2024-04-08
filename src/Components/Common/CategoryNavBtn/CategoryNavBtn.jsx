@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 const CategoryNavBtn = ({ className, unit = [] }) => {
     return (
@@ -7,7 +7,7 @@ const CategoryNavBtn = ({ className, unit = [] }) => {
                 unit.map((link, index) => {
                     const lastElement = unit.length - 1 === index
 
-                    return <Link to={link.to} key={index} className={`bg-primaryColor focus:bg-white focus:text-black hover:bg-white/20 text-white px-10 border-l-[1px] ${lastElement ? 'border-r-[1px]' : ""} uppercase font-extrabold border-gray-400 p-3`}>{link.text}</Link>
+                    return <NavLink to={link.to} key={index} className={`bg-primaryColor focus:bg-red-700 focus:text-white hover:bg-white/20 text-white px-10 border-l-[1px] ${lastElement ? 'border-r-[1px]' : ""} uppercase font-extrabold border-gray-400 p-3`}>{link.text}</NavLink>
                 })
             }
         </div>
