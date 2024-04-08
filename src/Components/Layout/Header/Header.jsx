@@ -55,11 +55,9 @@ const Header = () => {
                 <Logo />
                 <div className={`${isOpen && '!translate-x-0'} max-lg:-translate-x-full transition-all ease-in-out duration-300 max-lg:fixed max-lg:w-5/6 inset-0`}>
                     <div className="flex max-lg:gap-2 relative inset-0 max-lg:flex-col max-lg:overflow-y-scroll max-lg:bg-gray-100 h-full">
-                        <div className="flex items-center p-5 lg:hidden">
-                            <Link className="mix-blend-multiply">
-                                <img className="h-20" src="https://m.media-amazon.com/images/S/abs-image-upload-na/3/AmazonStores/A21TJRUUN4KGV/8b698934e838e577879675a48615bd14.w3334.h3334.jpg" />
-                            </Link>
-                            <div className=" ml-5 p-1 px-5 text-sm rounded text-primaryColor border-2 border-primaryColor">Login/Register</div>
+                        <div className="flex items-center justify-between p-2 lg:hidden">
+                            <Logo />
+                            <div className="p-1 px-2 text-sm font-semibold rounded text-primaryColor border-2 border-primaryColor">Login/Register</div>
                         </div>
 
                         <div className="bg-white max-lg:border-2 flex max-lg:flex-col">
