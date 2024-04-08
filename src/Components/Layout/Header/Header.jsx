@@ -86,7 +86,7 @@ const Header = () => {
                                                 </Dropdown>
                                             </div>
                                         )
-                                    }) : <div className="grid grid-cols-4 gap-2"><Skeleton count={1} height={30} width={100} /><Skeleton count={1} height={30} width={100} /><Skeleton count={1} height={30} width={100} /><Skeleton count={1} height={30} width={100} /></div>
+                                    }) : <div className="grid grid-cols-4 m-5 gap-2 max-lg:grid-cols-1"><Skeleton count={1} className="max-lg:!h-full max-lg:!w-full" height={30} width={100} /><Skeleton count={1} className="max-lg:!h-full max-lg:!w-full" height={30} width={100} /><Skeleton count={1} className="max-lg:!h-full max-lg:!w-full" height={30} width={100} /><Skeleton count={1} className="max-lg:!h-full max-lg:!w-full" height={30} width={100} /></div>
                             }
                         </div>
 
@@ -110,7 +110,7 @@ const Header = () => {
                 </div>
 
                 {/* user actions */}
-                <div className="flex">
+                <div className="flex max-lg:py-2">
                     <IconTitleButton className="max-lg:hidden">
                         <FaSearch />
                         <p className="text-xs font-bold">Search</p>
